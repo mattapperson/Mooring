@@ -97,7 +97,7 @@ describe('after hooks', function() {
 
         var cook = hooks.createHook('cook', function(food) {
 
-            return 'I LOVE BURGERS'
+            return 'I LOVE BURGERS';
         });
 
         // When you call the now-hooked method, the hooks will be called
@@ -118,7 +118,7 @@ describe('after hooks', function() {
         });
 
         var cook = hooks.createHook('cook', function(food, callback) {
-            callback('I LOVE BURGERS', 'I hate fries')
+            callback('I LOVE BURGERS', 'I hate fries');
         });
 
         // When you call the now-hooked method, the hooks will be called

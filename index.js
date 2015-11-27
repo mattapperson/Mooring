@@ -107,7 +107,7 @@ Kareem.prototype.callHook = function(name, args, fn) {
             var err = results.shift();
 
             safeDone.apply({}, results);
-        })
+        });
     }, methodCallback || function() {});
 
 };
