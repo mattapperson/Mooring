@@ -2,7 +2,7 @@
 # Mooring
 
 
-[![Build Status](https://travis-ci.org/appersonlabs/mooring.svg?branch=master)](https://travis-ci.org/appersonlabs/mooring.svg)
+[![Build Status](https://travis-ci.org/appersonlabs/Mooring.svg?branch=master)](https://travis-ci.org/appersonlabs/Mooring.svg)
 [![Coverage Status](https://coveralls.io/repos/appersonlabs/mooring/badge.svg?branch=master&service=github)](https://coveralls.io/github/appersonlabs/mooring?branch=master)
 [![bitHound Overalll Score](https://www.bithound.io/github/appersonlabs/Mooring/badges/score.svg)](https://www.bithound.io/github/appersonlabs/Mooring)
 
