@@ -1,11 +1,9 @@
 
-# cpt-hook
+# Mooring
 
 
-[![Build Status](https://travis-ci.org/vkarpov15/kareem.svg?branch=master)](https://travis-ci.org/vkarpov15/kareem)
-[![Coverage Status](https://img.shields.io/coveralls/vkarpov15/kareem.svg)](https://coveralls.io/r/vkarpov15/kareem)
-
-
+[![Build Status](https://travis-ci.org/appersonlabs/mooring.svg?branch=master)](https://travis-ci.org/appersonlabs/mooring.svg)
+[![Coverage Status](https://coveralls.io/repos/appersonlabs/mooring/badge.svg?branch=master&service=github)](https://coveralls.io/github/appersonlabs/mooring?branch=master)
 
 Born from a desire to have an API / hooks system that:
 
@@ -38,6 +36,7 @@ method receves and can augment them.
         // Here, false marks the hook as synchronous
         hooks.before('cook', false, function(food) {
             // food == 'burger'
+            assert.equal('burger', food);
 
             // your code here
             // synchronous hooks can NOT augment params passed to hooked methods
@@ -45,6 +44,7 @@ method receves and can augment them.
 
         var cook = hooks.createHook('cook', function(food) {
             // This is the method you want to hook
+            done();
         });
 
         // When you call the now-hooked method, the hooks will be called
@@ -61,6 +61,7 @@ Asynchronous is the default
 ```javascript
     
         hooks.before('cook', function(food, next) {
+
             // food = burger
             food = 'hotdog';
             // your code here
@@ -70,6 +71,8 @@ Asynchronous is the default
 
         var cook = hooks.createHook('cook', function(food) {
             // food = hotdog
+            assert.equal('hotdog', food);
+            done();
             // This is the method you want to hook
         });
 
@@ -113,12 +116,13 @@ Asynchronous is the default
         // Here, false marks the hook as synchronous
         hooks.after('cook', false, function(feelings) {
             // feelings == 'I LOVE BURGERS'
+            assert.equal('I LOVE BURGERS', feelings);
+            done();
         });
 
         var cook = hooks.createHook('cook', function(food) {
-            if(food === 'burger') {
-                return 'I LOVE BURGERS'
-            }
+
+            return 'I LOVE BURGERS'
         });
 
         // When you call the now-hooked method, the hooks will be called
@@ -137,27 +141,28 @@ Asynchronous is the default
         hooks.after('cook', function(feelings, feelings2, next) {
             // feelings == 'I LOVE BURGERS'
             // feelings2 == 'I hate fries'
+            assert.equal('I LOVE BURGERS', feelings);
+            assert.equal('I hate fries', feelings2);
 
             next('Burgers are OK');
         });
 
         var cook = hooks.createHook('cook', function(food, callback) {
-            if(food === 'burger') {
-                callback('I LOVE BURGERS', 'I hate fries')
-            }
+            callback('I LOVE BURGERS', 'I hate fries')
         });
 
         // When you call the now-hooked method, the hooks will be called
         cook('burger', function(feelings, feelings2) {
             // feelings == 'Burgers are OK'
             // feelings2 == 'I hate fries'
+            assert.equal('Burgers are OK', feelings);
+            assert.equal('I hate fries', feelings2);
+            done();
         });
     
 ```
 
 #### It can run multipe after hooks
-
-feelings == 'Burgers are OK'
 
 ```javascript
     
@@ -174,12 +179,14 @@ feelings == 'Burgers are OK'
 
             next();
         });
-        var cook = hooks.createHook('cook', function() {
-            done();
+        var cook = hooks.createHook('cook', function(cb) {
+            cb();
         });
         cook(function() {
             assert.equal(1, count1);
             assert.equal(1, count2);
+            done();
+
         });
     
 ```
