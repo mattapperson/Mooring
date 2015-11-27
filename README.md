@@ -4,6 +4,7 @@
 
 [![Build Status](https://travis-ci.org/appersonlabs/mooring.svg?branch=master)](https://travis-ci.org/appersonlabs/mooring.svg)
 [![Coverage Status](https://coveralls.io/repos/appersonlabs/mooring/badge.svg?branch=master&service=github)](https://coveralls.io/github/appersonlabs/mooring?branch=master)
+[![bitHound Overalll Score](https://www.bithound.io/github/appersonlabs/mooring/badges/score.svg)](https://www.bithound.io/github/appersonlabs/mooring)
 
 Born from a desire to have an API / hooks system that:
 
