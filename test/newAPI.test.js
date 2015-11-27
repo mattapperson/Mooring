@@ -13,7 +13,6 @@ describe('New API', function() {
     it('Entire API exists', function() {
         expect(hooks.before).to.exist;
         expect(hooks.after).to.exist;
-        expect(hooks.addHooks).to.exist;
         expect(hooks.createHook).to.exist;
         expect(hooks.callHook).to.exist;
     });

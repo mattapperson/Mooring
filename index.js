@@ -120,10 +120,6 @@ Mooring.prototype.createHook = function(name, fn) {
     };
 };
 
-Mooring.prototype.addHooks = function() {
-    // TODO implament addHooks
-};
-
 Mooring.prototype.before = function(name, isAsync, fn) {
     if (typeof arguments[1] !== 'boolean') {
         fn = isAsync;
