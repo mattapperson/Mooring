@@ -1,12 +1,12 @@
 {
     "name": "mooring",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Simple, stable, easy to use system for pre/post hooks in NodeJS",
     "main": "index.js",
     "scripts": {
         "test": "./node_modules/mocha/bin/mocha ./test/*",
         "docs": "node ./docs.js",
-        "prepublishOnly": "npm run docs",
+        "prepublish": "npm run docs",
         "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
     },
     "repository": {
