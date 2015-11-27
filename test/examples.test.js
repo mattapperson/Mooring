@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Kareem = require('../');
+var Mooring = require('../');
 
 /*
 * Before hooks are called before a given function executes. They receve in their method sig all the params the hooked
@@ -9,7 +9,7 @@ describe('before hooks', function() {
     var hooks;
 
     beforeEach(function() {
-        hooks = new Kareem();
+        hooks = new Mooring();
     });
 
     it('runs before hooks with a synchronous API', function(done) {
@@ -84,7 +84,7 @@ describe('after hooks', function() {
     var hooks;
 
     beforeEach(function() {
-        hooks = new Kareem();
+        hooks = new Mooring();
     });
 
     it('runs after hooks with a synchronous API', function(done) {

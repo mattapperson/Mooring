@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Kareem = require('../');
+var Mooring = require('../');
 var expect = require('chai').expect;
 
 
@@ -7,7 +7,7 @@ describe('New API', function() {
     var hooks;
 
     beforeEach(function() {
-        hooks = new Kareem();
+        hooks = new Mooring();
     });
 
     it('Entire API exists', function() {
@@ -23,7 +23,7 @@ describe('New API before hooks', function() {
     var hooks;
 
     beforeEach(function() {
-        hooks = new Kareem();
+        hooks = new Mooring();
     });
 
 
@@ -91,7 +91,7 @@ describe('after hooks', function() {
     var hooks;
 
     beforeEach(function() {
-        hooks = new Kareem();
+        hooks = new Mooring();
     });
 
     it('executes with parameters passed in', function(done) {
@@ -143,7 +143,7 @@ describe('createHook()', function() {
     var hooks;
 
     beforeEach(function() {
-        hooks = new Kareem();
+        hooks = new Mooring();
     });
 
     it('wraps a callable function in hooks', function(done) {

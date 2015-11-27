@@ -55,12 +55,12 @@ function iterateMiddleware(middleware, args, done) {
     });
 }
 
-function Kareem() {
+function Mooring() {
     this._pres = {};
     this._posts = {};
 }
 
-Kareem.prototype.callHook = function(name, args, fn) {
+Mooring.prototype.callHook = function(name, args, fn) {
     var _this = this;
     var methodCallback = _.isFunction(_.last(args)) ? args.pop() : undefined;
     args = _.clone(args, true);
@@ -112,7 +112,7 @@ Kareem.prototype.callHook = function(name, args, fn) {
 
 };
 
-Kareem.prototype.createHook = function(name, fn) {
+Mooring.prototype.createHook = function(name, fn) {
     var _this = this;
     return function() {
         var args = Array.prototype.slice.call(arguments);
@@ -120,11 +120,11 @@ Kareem.prototype.createHook = function(name, fn) {
     };
 };
 
-Kareem.prototype.addHooks = function() {
+Mooring.prototype.addHooks = function() {
     // TODO implament addHooks
 };
 
-Kareem.prototype.before = function(name, isAsync, fn) {
+Mooring.prototype.before = function(name, isAsync, fn) {
     if (typeof arguments[1] !== 'boolean') {
         fn = isAsync;
         isAsync = true;
@@ -138,7 +138,7 @@ Kareem.prototype.before = function(name, isAsync, fn) {
     return this;
 };
 
-Kareem.prototype.after = function(name, isAsync, fn) {
+Mooring.prototype.after = function(name, isAsync, fn) {
     if (typeof arguments[1] !== 'boolean') {
         fn = isAsync;
         isAsync = true;
@@ -151,4 +151,4 @@ Kareem.prototype.after = function(name, isAsync, fn) {
     return this;
 };
 
-module.exports = Kareem;
+module.exports = Mooring;
