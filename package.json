@@ -1,0 +1,26 @@
+{
+  "name": "mooring",
+  "version": "1.0.0",
+  "description": "Simple, stable, easy to use system for pre/post hooks in NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha ./test/*",
+    "docs": "node ./docs.js",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/appersonlabs/mooring.git"
+  },
+  "devDependencies": {
+    "acquit": "0.4.0",
+    "coveralls": "^2.11.4",
+    "istanbul": "0.4.1",
+    "mocha": "2.3.4"
+  },
+  "author": "Matt Apperson <matt@appersonlabs.com",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^3.4.1"
+  }
+}
