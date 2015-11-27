@@ -156,3 +156,26 @@ describe('after hooks', function() {
         });
     });
 });
+
+describe('call hooks', function() {
+    var hooks;
+
+    beforeEach(function() {
+        hooks = new Mooring();
+    });
+
+    it('lets you call a hook without first defining it', function(done) {
+        // Here, false marks the hook as synchronous
+        hooks.after('cook', false, function(feelings) {
+            // feelings == 'I LOVE BURGERS'
+            assert.equal('I LOVE BURGERS', feelings);
+            done();
+        });
+
+        // first param is the hook name, next is an array of arguments, and lastly is your hooked method/code
+        hooks.callHook('cook', ['burger'], function(food) {
+
+            return 'I LOVE BURGERS';
+        });
+    });
+});
