@@ -123,7 +123,7 @@ Asynchronous is the default
 
         var cook = hooks.createHook('cook', function(food) {
 
-            return 'I LOVE BURGERS'
+            return 'I LOVE BURGERS';
         });
 
         // When you call the now-hooked method, the hooks will be called
@@ -149,7 +149,7 @@ Asynchronous is the default
         });
 
         var cook = hooks.createHook('cook', function(food, callback) {
-            callback('I LOVE BURGERS', 'I hate fries')
+            callback('I LOVE BURGERS', 'I hate fries');
         });
 
         // When you call the now-hooked method, the hooks will be called
@@ -188,6 +188,27 @@ Asynchronous is the default
             assert.equal(1, count2);
             done();
 
+        });
+    
+```
+
+## call hooks
+
+#### It lets you call a hook without first defining it
+
+```javascript
+    
+        // Here, false marks the hook as synchronous
+        hooks.after('cook', false, function(feelings) {
+            // feelings == 'I LOVE BURGERS'
+            assert.equal('I LOVE BURGERS', feelings);
+            done();
+        });
+
+        // first param is the hook name, next is an array of arguments, and lastly is your hooked method/code
+        hooks.callHook('cook', ['burger'], function(food) {
+
+            return 'I LOVE BURGERS';
         });
     
 ```

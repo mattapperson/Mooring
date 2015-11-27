@@ -1,6 +1,6 @@
 {
     "name": "mooring",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Simple, stable, easy to use system for pre/post hooks in NodeJS",
     "main": "index.js",
     "scripts": {
