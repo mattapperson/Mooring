@@ -20,7 +20,7 @@ Born from a desire to have an API / hooks system that:\n
 Credit to the [kareem](https://github.com/vkarpov15/kareem) & [grappling-hook](https://github.com/keystonejs/grappling-hook)
 projects for their insight and the inspiration they provided (also some code ;).)\n\n
 
-# API\n\n
+# API Spec\n\n
 `
 
 for (var i = 0; i < blocks.length; ++i) {
