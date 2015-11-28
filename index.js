@@ -3,7 +3,7 @@ var _ = require('lodash');
 var async = require('async');
 
 /*
-based on code from Isaac Schlueter's blog post:
+based on code from Isaac Schlueter's blog post and borroed from the grappling-hook keystone project:
 http://blog.izs.me/post/59142742143/designing-apis-for-asynchrony
 */
 function dezalgofy(fn, done) {
@@ -22,6 +22,7 @@ function dezalgofy(fn, done) {
     }
 }
 
+// An augmented version of the iteration method from Keystone's grappling-hook library
 function iterateMiddleware(middleware, args, done) {
     done = done || /* istanbul ignore next: untestable */ function(err) {
         if (err) {
