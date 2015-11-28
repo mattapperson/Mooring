@@ -63,6 +63,7 @@ Asynchronous is the default
     
         hooks.before('cook', function(food, next) {
 
+            assert.equal('burger', food);
             // food = burger
             food = 'hotdog';
             // your code here
