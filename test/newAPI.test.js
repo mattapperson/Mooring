@@ -146,18 +146,17 @@ describe('createHook()', function() {
     });
 
     it('wraps a callable function in hooks', function(done) {
-        hooks.before('cook', function(o, next) {
+        hooks.before('cook', function(o, cb, next) {
             o.bacon = 3;
             next(o);
         });
 
-        hooks.before('cook', function(obj, next) {
-
+        hooks.before('cook', function(obj, cb, next) {
             obj.eggs = 4;
             next(obj);
         });
 
-        hooks.before('cook', function(obj, next) {
+        hooks.before('cook', function(obj, cb, next) {
             obj.waffles = false;
             next(obj);
         });
@@ -188,6 +187,23 @@ describe('createHook()', function() {
             assert.equal('no', result.tofu);
 
             assert.notEqual(obj, result);
+            done();
+        });
+    });
+
+    it('ensures all params are passed in, even methods', function(done) {
+        hooks.before('cook', function(food, next) {
+            expect(typeof food).to.equal('function');
+            expect(typeof next).to.equal('function');
+
+            next();
+        });
+
+        var cook = hooks.createHook('cook', function(food) {
+            return food();
+        });
+
+        cook(function(){
             done();
         });
     });

@@ -37,6 +37,7 @@ describe('before hooks', function() {
     it('also runs before hooks with an asynchronous API', function(done) {
         hooks.before('cook', function(food, next) {
 
+            assert.equal('burger', food);
             // food = burger
             food = 'hotdog';
             // your code here

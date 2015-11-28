@@ -70,8 +70,12 @@ Mooring.prototype.callHook = function(name, args, fn) {
         async.waterfall([
             // call befores
             function (next) {
-                iterateMiddleware(_this._pres[name] || [], args, function() {
+                var beforeArgs = methodCallback ? _.clone(args).concat(methodCallback) : args;
+                iterateMiddleware(_this._pres[name] || [], beforeArgs, function() {
                     var args = _.toArray(arguments);
+                    if (_.isFunction(_.last(args))) {
+                        args.pop();
+                    }
                     next.apply({}, [null].concat(args));
                 });
             },
