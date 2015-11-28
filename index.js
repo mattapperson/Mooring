@@ -70,9 +70,12 @@ Mooring.prototype.callHook = function(name, args, fn) {
         async.waterfall([
             // call befores
             function (next) {
+                // beforeArgs is used to ensure that callbacks are passed to JUST the before hook
                 var beforeArgs = methodCallback ? _.clone(args).concat(methodCallback) : args;
                 iterateMiddleware(_this._pres[name] || [], beforeArgs, function() {
                     var args = _.toArray(arguments);
+
+                    // Override the callback so we continue and the CB does not short-circut the next step
                     if (_.isFunction(_.last(args))) {
                         args.pop();
                     }
