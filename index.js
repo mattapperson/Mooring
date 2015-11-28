@@ -34,14 +34,14 @@ function iterateMiddleware(middleware, args, done) {
 
         if (middleware.isAsync) {
             middleware.fn.apply({}, args.concat(function() {
-                args = _.merge(args, _.toArray(arguments));
+                args = _.merge(_.clone(args, true), _.toArray(arguments));
                 next();
             }));
         } else {
             //synced
             var err;
             try {
-                middleware.fn.apply({}, args);
+                middleware.fn.apply({}, _.clone(args, true));
             } catch (e) {
                 /* istanbul ignore next: untestable */ err = e;
             }
