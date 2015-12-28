@@ -173,8 +173,8 @@ describe('call hooks', function() {
             done();
         });
 
-        // first param is the hook name, next is an array of arguments, and lastly is your hooked method/code
-        hooks.callHook('cook', ['burger'], function(food) {
+        // first param is the hook name, next is an array of arguments, next is a flag for is the call immutable and lastly is your hooked method/code
+        hooks.callHook('cook', ['burger'], true, function(food) {
 
             return 'I LOVE BURGERS';
         });

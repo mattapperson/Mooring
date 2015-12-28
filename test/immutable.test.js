@@ -38,5 +38,48 @@ describe('Immutablity tests', function() {
             done();
         });
     });
-    
+
+    it('should not mutate the orig request', function(done) {
+        hooks.before('cook', (food, next)=>{
+            food.name='A';
+            next(food);
+        });
+        var foodInput = {name: 'burger'};
+
+        var cook = hooks.createHook('cook', food => {
+            expect(food.name).to.equal('A');
+            expect(foodInput.name).to.equal('burger');
+
+            done();
+        });
+
+        cook(foodInput);
+    });
+
+});
+
+describe('Mutablity tests', function() {
+    var hooks;
+
+    beforeEach(function() {
+        hooks = new Mooring();
+    });
+
+    it('should mutate the orig request', function(done) {
+        hooks.before('cook', (food, next)=>{
+            food.name='A';
+            next(food); // nothing passed through
+        });
+        var foodInput = {name: 'burger'};
+
+        var cook = hooks.createMutableHook('cook', food => {
+            expect(food.name).to.equal('A');
+            expect(foodInput.name).to.equal('A');
+
+            done();
+        });
+
+        cook(foodInput);
+    });
+
 });

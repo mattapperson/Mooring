@@ -23,7 +23,7 @@ function dezalgofy(fn, done) {
 }
 
 // An augmented version of the iteration method from Keystone's grappling-hook library
-function iterateMiddleware(middleware, args, done) {
+function iterateMiddleware(middleware, args, immutable, done) {
     done = done || /* istanbul ignore next: untestable */ function(err) {
         if (err) {
             throw err;
@@ -35,14 +35,15 @@ function iterateMiddleware(middleware, args, done) {
 
         if (middleware.isAsync) {
             middleware.fn.apply({}, args.concat(function() {
-                args = _.merge(_.clone(args, true), _.toArray(arguments));
+                args = immutable ? _.clone(args, true) : args;
+                args = _.merge(args, _.toArray(arguments));
                 next();
             }));
         } else {
             //synced
             var err;
             try {
-                middleware.fn.apply({}, _.clone(args, true));
+                middleware.fn.apply({}, immutable ? _.clone(args, true) : args);
             } catch (e) {
                 /* istanbul ignore next: untestable */ err = e;
             }
@@ -61,10 +62,10 @@ function Mooring() {
     this._posts = {};
 }
 
-Mooring.prototype.callHook = function(name, args, fn) {
+Mooring.prototype.callHook = function(name, args, immutable, fn) {
     var _this = this;
     var methodCallback = _.isFunction(_.last(args)) ? args.pop() : undefined;
-    args = _.clone(args, true);
+    args = immutable ? _.clone(args, true) : args;
 
     dezalgofy(function(safeDone) {
         async.waterfall([
@@ -72,7 +73,7 @@ Mooring.prototype.callHook = function(name, args, fn) {
             function (next) {
                 // beforeArgs is used to ensure that callbacks are passed to JUST the before hook
                 var beforeArgs = methodCallback ? _.clone(args).concat(methodCallback) : args;
-                iterateMiddleware(_this._pres[name] || [], beforeArgs, function() {
+                iterateMiddleware(_this._pres[name] || [], beforeArgs, immutable, function() {
                     var args = _.toArray(arguments);
 
                     // Override the callback so we continue and the CB does not short-circut the next step
@@ -103,7 +104,7 @@ Mooring.prototype.callHook = function(name, args, fn) {
                 var results = _.toArray(arguments);
                 var next = results.pop();
 
-                iterateMiddleware(_this._posts[name] || [], results, function() {
+                iterateMiddleware(_this._posts[name] || [], results, immutable, function() {
                     var afterResults = _.toArray(arguments);
 
                     next.apply({}, [null].concat(afterResults));
@@ -124,7 +125,16 @@ Mooring.prototype.createHook = function(name, fn) {
     var _this = this;
     return function() {
         var args = Array.prototype.slice.call(arguments);
-        _this.callHook(name, args, fn);
+        _this.callHook(name, args, true, fn);
+    };
+};
+
+
+Mooring.prototype.createMutableHook = function(name, fn) {
+    var _this = this;
+    return function() {
+        var args = Array.prototype.slice.call(arguments);
+        _this.callHook(name, args, false, fn);
     };
 };
 
